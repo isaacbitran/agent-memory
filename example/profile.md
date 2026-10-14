@@ -1,0 +1,1 @@
+Millpond Bakery is a two-oven neighborhood bakery opened in 2023. It sells naturally leavened bread, morning pastries, and a short lunch menu. Three bakers, two counter staff, one owner who also does the books. Open Tuesday to Sunday; wholesale to two cafes. The bakery cares about long fermentation, local grain, and not wasting bread: day-old loaves go to a food bank.
