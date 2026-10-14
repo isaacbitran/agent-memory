@@ -1,10 +1,11 @@
 # agent-memory
 
-How I give AI agents a memory that stays correct for months. I use it in a personal knowledge base and in an AI analyst a college football staff uses daily.
+A memory format for AI agents that stays correct for months. I run it in my own knowledge base and in [Edel AI](https://github.com/isaacbitran/edel-ai), an analyst a college football staff uses daily.
 
-The idea: every fact is distilled once, on arrival, into small structured files. Agents answer from the distilled current truth, not from raw transcripts. A lint gate checks every write.
+## How it works
+Every fact is distilled once, when it arrives, into small Markdown files. Agents answer from the distilled current truth, not from raw transcripts. A lint gate checks every write, and anything ambiguous waits for a human.
 
-## The rules
+### The rules
 1. One file per subject. Each file has `## Now` (current truth, at most 10 bullets) and `## Log` (append-only evidence, one dated fact per line with its source).
 2. Now is the answer; Log is the proof. Changing a Now bullet requires a new Log line in the same write.
 3. Nothing is deleted. A contradiction appends the new line and marks the old one `— superseded <date>, see <pointer>`. Newest date wins.
@@ -15,7 +16,7 @@ The idea: every fact is distilled once, on arrival, into small structured files.
 8. A generated `CONTEXT.md` is rebuilt from the files within a byte budget and is what the agent reads at the start of every turn. It is fenced as data, never as instructions.
 9. Weekly consolidation: a digest proposes Now rewrites, flags Now bullets contradicted by newer Log lines (STALE), and checks every decision's "revisit if".
 
-## Layout
+### Layout
     profile.md  now.md  areas/<subject>.md  people/<slug>.md
     decisions/YYYY-MM-DD-<slug>.md  meetings/ (immutable)  inbox.md  CONTEXT.md (generated)
 
@@ -24,6 +25,9 @@ The idea: every fact is distilled once, on arrival, into small structured files.
 - `WHY.md`: what broke before this.
 - `lint/`: a reference lint in Python, no dependencies, with tests.
 - `example/`: a synthetic memory for a fictional bakery, showing supersession, inbox deferral and STALE flags.
+
+## Stack
+Python 3 standard library only. Memory is plain Markdown with YAML-style frontmatter, so it works with any agent that can read and write files.
 
 ## Run
     python3 lint/memlint.py example --today 2026-04-20
