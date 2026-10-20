@@ -1,6 +1,23 @@
 # agent-memory
 
-A memory format for AI agents that stays correct for months. I run it in my own knowledge base and in [Edel AI](https://github.com/isaacbitran/edel-ai), an analyst a college football staff uses daily.
+**Memory for AI agents that stays correct for months**: small Markdown files, supersession instead of deletion, and a lint gate on every write.
+
+![MIT](https://img.shields.io/badge/license-MIT-blue) ![works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor-d97757) ![deps](https://img.shields.io/badge/dependencies-0-2ea44f)
+
+```bash
+npx skills add isaacbitran/agent-memory
+```
+
+Then just say "remember that we picked Postgres over Mongo because of joins". The agent files it, lints it, and finds it again next month.
+
+Optional: lint every memory write automatically with a Claude Code hook in `.claude/settings.json`:
+
+```json
+{ "hooks": { "PostToolUse": [ { "matcher": "Edit|Write",
+  "hooks": [ { "type": "command", "command": "python3 .claude/skills/agent-memory/scripts/memlint.py memory" } ] } ] } }
+```
+
+I run it in my own knowledge base and in [Edel AI](https://github.com/isaacbitran/edel-ai), an analyst a college football staff uses every week.
 
 ## How it works
 Every fact is distilled once, when it arrives, into small Markdown files. Agents answer from the distilled current truth, not from raw transcripts. A lint gate checks every write, and anything ambiguous waits for a human.
