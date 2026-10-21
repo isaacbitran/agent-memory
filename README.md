@@ -1,6 +1,6 @@
 # agent-memory
 
-**Memory for AI agents that stays correct for months**: small Markdown files, supersession instead of deletion, and a lint gate on every write.
+**Memory for AI agents that stays correct for years**: small Markdown files, supersession instead of deletion, and a lint gate on every write.
 
 ![MIT](https://img.shields.io/badge/license-MIT-blue) ![works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor-d97757) ![deps](https://img.shields.io/badge/dependencies-0-2ea44f)
 
